@@ -1,16 +1,35 @@
-console.log('fils de iench');
+//the HTML element which id is game is defined as a constant
+const canvas = document.getElementById('game');
 
+ //we define the context in 2D (we could use 3D for example)
+const ctx = canvas.getContext('2d');
 
-/*
-const canvas = document.getElementById('game'); //the HTML element which id is game is defined as a constant
-const ctx = canvas.getContext('2d'); //we define the context in 2D (we could use 3D for example)
+//snake's speed
+let speed = 7;
 
-let speed = 7; //snake's speed
+//definition of the board, the tiles
+let tileCount = 20; //it'll be a 20x20 board
+let tileSize = canvas.width / tileCount - 2; //define a smaller size for the tiles (visual style)
 
-function drawGame(){//game loop to update the screen in real time
-  console.log('draw game');
+//definition of the snake's starting position
+let headX = 10;
+let headY = 10;
+
+//gameloop
+function drawGame(){
+  clearScreen();
+  drawsnake();
   setTimeout(drawGame, 1000/ speed); //1000ms makes 1s
 }
 
+function clearScreen(){
+  ctx.fillStyle = 'black'; //definition of a colour
+  ctx.fillRect(0,0,canvas.width,canvas.height); //filling the canvas with the previous fillStyle
+
+}
+
+function drawSnake(){
+  ctx.fillStyle = 'green';
+}
+
 drawGame();
-*/
