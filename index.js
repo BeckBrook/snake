@@ -15,6 +15,11 @@ let tileSize = canvas.width / tileCount - 2; //define a smaller size for the til
 let headX = 10;
 let headY = 10;
 
+//controls, by default 0
+let xVelocity=0;
+let yVelocity=0;
+
+
 //gameloop
 function drawGame(){
   clearScreen();
@@ -28,8 +33,19 @@ function clearScreen(){
 }
 
 function drawSnake(){
-  ctx.fillStyle = 'green';//definition of the snake's colour
+  ctx.fillStyle = 'orange';//definition of the snake's colour
   ctx.fillRect(headX*tileCount, headY*tileCount, tileSize, tileSize);//painting the tile, at the position defined by X and Y
 }
+
+document.body.addEventListener('keydown', keyDown);
+function keyDown(event){
+  //up
+  if(event.keyCode == 38){
+    yVelocity = -1; //one tile at a time up
+    xVelocity = 0; //we only move up
+  }
+
+}
+
 
 drawGame();
