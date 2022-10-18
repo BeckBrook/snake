@@ -4,6 +4,18 @@ const canvas = document.getElementById('game');
  //we define the context in 2D (we could use 3D for example)
 const ctx = canvas.getContext('2d');
 
+
+
+//snake parts constructor
+class SnakePart{
+  constructor(x,y);
+  this.x = x;
+  this.y = y;
+
+}
+
+
+
 //snake's speed
 let speed = 7;
 
@@ -14,6 +26,10 @@ let tileSize = canvas.width / tileCount - 2; //define a smaller size for the til
 //definition of the snake's starting position
 let headX = 10;
 let headY = 10;
+
+//an array to keep the snake parts
+const snakeParts = [];
+let taillenght = 2;
 
 //controls, by default 0
 let xVelocity=0;
@@ -42,6 +58,7 @@ function clearScreen(){
 function drawSnake(){
   ctx.fillStyle = 'orange';//definition of the snake's colour
   ctx.fillRect(headX*tileCount, headY*tileCount, tileSize, tileSize);//painting the tile, at the position defined by X and Y
+
 }
 
 function drawApple(){
@@ -53,7 +70,10 @@ function checkAppleCollision(){
   if(appleX == headX && appleY == headY){
     appleX = Math.floor(Math.random()* tileCount);
     appleY = Math.floor(Math.random()* tileCount);
+    taillenght = ++;
   }
+
+
 }
 
 function changeSnakePosition(){
