@@ -43,6 +43,11 @@ function drawSnake(){
   ctx.fillRect(headX*tileCount, headY*tileCount, tileSize, tileSize);//painting the tile, at the position defined by X and Y
 }
 
+function drawApple(){
+  ctx.fillSytle = "red";
+  ctx.fillRect(appleX, appleY, tileSize, tileSize);
+}
+
 function changeSnakePosition(){
   headX = headX + xVelocity; //xVelocity can be negative or positive
   headY = headY + yVelocity;
