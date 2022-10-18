@@ -51,8 +51,8 @@ function drawApple(){
 
 function checkAppleCollision(){
   if(appleX == headX && appleY == appleX){
-    appleX = Math.floor(Match.random()* tileCount);
-    appleY = Math.floor(Match.random()* tileCount);    
+    appleX = Math.floor(Math.random()* tileCount);
+    appleY = Math.floor(Math.random()* tileCount);
   }
 }
 
