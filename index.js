@@ -44,7 +44,11 @@ function drawSnake(){
 }
 
 function drawApple(){
+<<<<<<< HEAD
   ctx.fillStyle = 'red';
+=======
+  ctx.fillSytle = "red";
+>>>>>>> 4b83b246cd7da33708234cf6a223598fa966b562
   ctx.fillRect(appleX, appleY, tileSize, tileSize);
 }
 
