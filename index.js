@@ -19,12 +19,17 @@ let headY = 10;
 let xVelocity=0;
 let yVelocity=0;
 
+//apple position
+let appleX = 5;
+let appleY = 5;
+
 
 //gameloop
 function drawGame(){
   clearScreen();
   changeSnakePosition();
   drawSnake();
+  drawApple();
   setTimeout(drawGame, 1000/ speed); //1000ms makes 1s
 }
 
@@ -47,9 +52,37 @@ document.body.addEventListener('keydown', keyDown);
 function keyDown(event){
   //up
   if(event.keyCode == 38){
+    if (yVelocity == 1 )
+      return;
     yVelocity = -1; //one tile at a time up
     xVelocity = 0; //we only move up
   }
+
+  //down
+  if(event.keyCode == 40){
+    if (yVelocity == -1 )
+      return;
+    yVelocity = +1; //one tile at a time down
+    xVelocity = 0; //we only move down
+  }
+
+  //left
+  if(event.keyCode == 37){
+    if (xVelocity == 1 )
+      return;
+    yVelocity = 0; //one tile at a time left
+    xVelocity = -1; //we only move left
+  }
+
+  //right
+  if(event.keyCode == 39){
+    if (xVelocity == -1 )
+      return;
+    yVelocity = 0; //one tile at a time right
+    xVelocity = 1; //we only move right
+  }
+
+
 
 }
 
