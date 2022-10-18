@@ -18,18 +18,18 @@ let headY = 10;
 //gameloop
 function drawGame(){
   clearScreen();
-  drawsnake();
+  drawSnake();
   setTimeout(drawGame, 1000/ speed); //1000ms makes 1s
 }
 
 function clearScreen(){
   ctx.fillStyle = 'black'; //definition of a colour
   ctx.fillRect(0,0,canvas.width,canvas.height); //filling the canvas with the previous fillStyle
-
 }
 
 function drawSnake(){
-  ctx.fillStyle = 'green';
+  ctx.fillStyle = 'green';//definition of the snake's colour
+  ctx.fillRect(headX*tileCount, headY*tileCount, tileSize, tileSize);//painting the tile, at the position defined by X and Y
 }
 
 drawGame();
