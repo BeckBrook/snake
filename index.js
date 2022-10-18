@@ -23,6 +23,7 @@ let yVelocity=0;
 //gameloop
 function drawGame(){
   clearScreen();
+  changeSnakePosition();
   drawSnake();
   setTimeout(drawGame, 1000/ speed); //1000ms makes 1s
 }
@@ -35,6 +36,11 @@ function clearScreen(){
 function drawSnake(){
   ctx.fillStyle = 'orange';//definition of the snake's colour
   ctx.fillRect(headX*tileCount, headY*tileCount, tileSize, tileSize);//painting the tile, at the position defined by X and Y
+}
+
+function changeSnakePosition(){
+  headX = headX + xVelocity; //xVelocity can be negative or positive
+  headY = headY + yVelocity;
 }
 
 document.body.addEventListener('keydown', keyDown);
