@@ -34,6 +34,9 @@ let yVelocity=0;
 //score variable, always at 0 in the beginning
 let score = 0;
 
+const gulpSound= new Audio("gulp.mp3");
+const gameOverSound = new Audio("crash.mp3");
+
 //apple position
 let appleX = 5;
 let appleY = 5;
@@ -42,20 +45,24 @@ let appleY = 5;
 //gameloop
 function drawGame(){
   changeSnakePosition();
-
   let result = isGameOver()
-
   if(result){
     return;
-
   }
-
   clearScreen();
-
   checkAppleCollision();
   drawApple();
   drawSnake();
   drawScore();
+
+  if(score > 2){
+    speed = 11;
+  }
+
+  if(score > 5){
+    speed = 15;
+  }
+
   setTimeout(drawGame, 1000/ speed); //1000ms makes 1s
 }
 
@@ -64,7 +71,6 @@ function isGameOver(){
   if(yVelocity === 0 && xVelocity === 0){
     return false;
   }
-
   //walls
   if (headX<0){
     gameOver=true;
@@ -78,7 +84,6 @@ function isGameOver(){
   else if (headY === tileCount){
     gameOver=true;
   }
-
   for(let i=0; i < snakeParts.length; i++){
     let part = snakeParts[i];
     if(part.x === headX && part.y === headY){
@@ -86,13 +91,9 @@ function isGameOver(){
       break;
     }
   }
-
-
-
   if(gameOver){
     ctx.fillSytle = 'white';
     ctx.font = '50px Verdana';
-
     var gradient = ctx.createLinearGradient(0,0, canvas.width, 0);
     gradient.addColorStop('0','magenta');
     gradient.addColorStop('0.5','blue');
@@ -100,9 +101,8 @@ function isGameOver(){
     //fill with gradient
     ctx.fillStyle = gradient;
     ctx.fillText("Game Over !", canvas.width / 6.5, canvas.height / 2);
-
+    gameOverSound.play();
   }
-
   return gameOver;
 }
 
@@ -142,6 +142,7 @@ function checkAppleCollision(){
     appleY = Math.floor(Math.random()* tileCount);
     tailLength++;
     score++;
+    gulpSound.play();
   }
 
 
