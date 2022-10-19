@@ -4,17 +4,13 @@ const canvas = document.getElementById('game');
  //we define the context in 2D (we could use 3D for example)
 const ctx = canvas.getContext('2d');
 
-
-
 //snake parts constructor
-class SnakePart{
-  constructor(x,y);
-  this.x = x;
-  this.y = y;
-
+class snakePart{
+  constructor(x,y){
+    this.x = x;
+    this.y = y;
+  }
 }
-
-
 
 //snake's speed
 let speed = 7;
@@ -29,11 +25,14 @@ let headY = 10;
 
 //an array to keep the snake parts
 const snakeParts = [];
-let taillenght = 2;
+let tailLength = 2;
 
 //controls, by default 0
 let xVelocity=0;
 let yVelocity=0;
+
+//score variable, always at 0 in the beginning
+let score = 0;
 
 //apple position
 let appleX = 5;
@@ -45,9 +44,16 @@ function drawGame(){
   clearScreen();
   changeSnakePosition();
   checkAppleCollision();
-  drawSnake();
   drawApple();
+  drawSnake();
+  drawScore();
   setTimeout(drawGame, 1000/ speed); //1000ms makes 1s
+}
+
+function drawScore(){
+  ctx.fillStyle = 'white';
+  ctx.font = '10px Verdana';
+  ctx.fillText("Score : "+score, canvas.width-50,10);
 }
 
 function clearScreen(){
@@ -56,9 +62,17 @@ function clearScreen(){
 }
 
 function drawSnake(){
+  ctx.fillStyle = 'green';
+  for(let i =0; i < snakeParts.length; i++){
+    let part = snakeParts[i];
+    ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize);
+  }
+  snakeParts.push(new snakePart(headX, headY)); //put an item at the end of the list next to the head
+  while(snakeParts.length > tailLength){
+    snakeParts.shift(); //remove the furthers item from the snake aparts if we have more than our tailzise
+  }
   ctx.fillStyle = 'orange';//definition of the snake's colour
   ctx.fillRect(headX*tileCount, headY*tileCount, tileSize, tileSize);//painting the tile, at the position defined by X and Y
-
 }
 
 function drawApple(){
@@ -70,7 +84,7 @@ function checkAppleCollision(){
   if(appleX == headX && appleY == headY){
     appleX = Math.floor(Math.random()* tileCount);
     appleY = Math.floor(Math.random()* tileCount);
-    taillenght = ++;
+    tailLength++;
   }
 
 
